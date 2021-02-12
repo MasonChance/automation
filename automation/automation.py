@@ -4,8 +4,14 @@ import re
 # define funciton/match variables with regex to be run on the files in question
 
 def phone_re(line):
-  pass
+  regi = re.compile(r'\(\\d{3}\)[-.]\\d{3}[-.]\\d{4}(x\\d{5})?')
+  matches = re.findall(regi, line)
+  print(matches)
+  for num in matches:
+    print(f'num in list of matches: {str(num)}')
 
+  return matches
+  
 
 def email_re(line):
   pass
@@ -32,3 +38,5 @@ def write_phone(phone):
 # read input file, call the write fn for email and phone. 
 
 # define main 
+if __name__ == "__main__":
+  phone_re('861-5898 1-178-383-0937 001-048-736-2919')

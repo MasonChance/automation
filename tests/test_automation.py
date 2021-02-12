@@ -9,15 +9,12 @@ from automation.automation import phone_re, email_re, phone_form, write_phone, w
 def test_version():
     assert __version__ == '0.1.0'
 
-@pytest.mark.skip('pending code')
+# @pytest.mark.skip('pending code')
 def test_phone_regex(strings_with_phone_number):
-    phone = []
-    for line in strings_with_phone_number:
-        match = phone_re(line)
-        phone.append(match)
-    
+    phone = ''
+    match = phone_re(strings_with_phone_number)
     actual = phone
-    expected = ['861-5898', '1-178-383-0937', '001-048-736-2919']
+    expected = '.861-5898 lif 1-178-383-0937Mat bog001-048-736-2919'
     assert actual == expected
 
 @pytest.mark.skip('pending code')
@@ -81,10 +78,10 @@ def test_email_writer():
 
 @pytest.fixture
 def strings_with_phone_number():
-  return ['find.861-5898Especially', 'com +1-178-383-0937x54779Th', '001-048-736-2919Much']
+  return ['find.861-5898Especially com +1-178-383-0937x54779Th 001-048-736-2919Much']
 
 @pytest.fixture  
 def strings_with_email():
-    return [' eye. danielletaylor@hotmail.com Less', 'character. hsoto@sharp-king.org See']
+    return [' eye. danielletaylor@hotmail.com Less  character. hsoto@sharp-king.org See']
 
 
