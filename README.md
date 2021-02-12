@@ -28,4 +28,4 @@ pull requests are labeled by feature task branches.
 
 [set-up](https://github.com/MasonChance/automation/pull/1)
 [test-set-up](https://github.com/MasonChance/automation/pull/2)
-[phone-email-regex]()
+[phone-email-regex](https://github.com/MasonChance/automation/pull/3)
