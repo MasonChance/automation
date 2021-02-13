@@ -2,7 +2,7 @@ from automation import __version__
 
 
 import pytest
-from automation.automation import phone_re, email_re, phone_form, write_phone, write_email, check_dupe
+from automation.automation import phone_re, email_re, phone_form, check_dupe
 
 
 
@@ -74,24 +74,24 @@ def test_check_dupe_with_email_yes_dupe(strings_with_email):
     assert actual == expected
     
 
-@pytest.mark.skip('pending code')
+# @pytest.mark.skip('pending code')
 def test_phone_writer():
     line = ''
     with open('assets/phone_numbers.txt', 'r') as f:
-        line += f.readline(1)
+        line += f.readline()
     
     actual = line
-    expected = '861-26-5898'
+    expected = '008-445-7591 \n'
     assert actual == expected
 
-@pytest.mark.skip('pending code')
+# @pytest.mark.skip('pending code')
 def test_email_writer():
     line = ''
     with open('assets/emails.txt', 'r') as f:
-        line += f.readline(1)
+        line += f.readline()
     
     actual = line
-    expected = 'danielletaylor@hotmail.com'
+    expected = 'aaron84@gmail.com \n'
     assert actual == expected
 
 

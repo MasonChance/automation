@@ -1,5 +1,5 @@
 import re
-
+import shutil
 
 # define funciton/match variables with regex to be run on the files in question
 
@@ -26,8 +26,9 @@ def email_re(line:str)->list:
   
 # define function to format phone numbers (add 206 area code if area code missing)
 def phone_form(phone:str)->str:
+  
   if len(phone) < 8:
-    phone = '\n'
+    return
   if len(phone) == 8:
     phone = '206-'+ phone
   if '(' in phone:
@@ -35,7 +36,7 @@ def phone_form(phone:str)->str:
   if 'x' in phone:
     phone = phone[0:phone.index('x')]
 
-  return phone 
+  return phone
 
 
 
@@ -49,15 +50,48 @@ def check_dupe(potential:str, saved:list)->bool:
 
 # define function to write the phone numbers and emails to their respective files.
 
-def write_email(email):
-  pass
-
-def write_phone(phone):
-  pass
-
 # read input file, call the write fn for email and phone. 
 
 # define main 
 if __name__ == "__main__":
-  phone_re('861-5898 1-178-383-0937 001-048-736-2919')
-  email_re(' eye. danielletaylor@hotmail.com Less  character. hsoto@sharp-king.org See')
+  all_phone = []
+  all_email = []
+  with open('assets/potential-contacts.txt', 'r') as f:
+    extract_phone = phone_re(f.read())
+    
+    for num in extract_phone:
+      check = check_dupe(num, all_phone)
+      if check == False:
+        num = phone_form(num)
+        if num:
+          all_phone.append(num if len(num) >= 12 else phone_form(num))
+        else:
+          continue
+      else:
+        continue
+  
+  with open('assets/potential-contacts.txt', 'r') as f:
+    extract_email = email_re(f.read())
+    for mail in extract_email:
+      check = check_dupe(mail, all_email)
+      if check == False:
+        all_email.append(mail)
+      else:
+        continue
+  
+  with open('phone_numbers.txt','w+') as f:
+    all_phone.sort()
+    for num in all_phone:
+      f.write(f'{num} \n')
+  
+  with open('emails.txt', 'w+') as f:
+    all_email.sort()
+    for mail in all_email:
+      f.write(f'{mail} \n')
+
+  shutil.copy('emails.txt', 'assets')
+  shutil.copy('phone_numbers.txt', 'assets')
+
+
+
+  
